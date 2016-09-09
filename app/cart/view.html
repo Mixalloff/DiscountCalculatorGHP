@@ -1,0 +1,91 @@
+<link rel="stylesheet" href="app/cart/styles.css">
+
+<md-content class="main-container section" layout="column">
+    <section class="add-product section" layout>
+        <div class="add-product__functional-block functional-block" flex="50">
+            <h2>Добавить продукт</h2>
+            <md-input-container>
+            <input name="added_product_name"
+                    type="text"
+                    class="add-product__name"
+                    ng-model="addedProductName"
+                    placeholder="Продукт"
+                    aria-label="ADDED_PRODUCT_NAME">
+            </md-input-container>
+            <md-input-container>
+            <input name="added_product_price"
+                    type="number"
+                    class="add-product__price"
+                    step="1"
+                    min="0"
+                    ng-model="addedProductPrice"
+                    placeholder="Цена"
+                    aria-label="ADDED_PRODUCT_PRICE">
+            </md-input-container>
+            <md-button aria-label="ADD_PRODUCT_BUTTON"
+                    class="add-product__submit md-raised"
+                    ng-click="cart.addProduct(addedProductName, addedProductPrice)"> Добавить </md-button>
+        </div>
+        <div class="add-product__info-block info-block" flex="50">
+            <div class="add-product__info-block__note note">
+                <span>С помощью этой формы вы можете добавить товары в корзину</span>
+            </div>
+        </div>
+       
+    </section>
+    <md-divider></md-divider>
+    <section class="cart section" layout>
+        <div class="cart__functional-block functional-block" flex="50">
+            <h2>Корзина</h2>
+            <md-table-container ng-if="cart.products.length">
+                <table md-table class="cart__table">
+                    <thead md-head class="cart__table__head">
+                        <tr md-row md-row class="cart__table__head__row cart__table__row">
+                            <th md-column class="cell-50 cart__table__head__cell cart__table__cell">Продукт</th>
+                            <th md-column class="cell-25 cart__table__head__cell cart__table__cell">Цена</th>
+                            <th md-column class="cell-25 cart__table__head__cell cart__table__cell">Цена со скидкой</th>
+                        </tr>
+                    </thead>
+                    <tbody md-body class="cart__table__body">
+                        <tr md-row ng-repeat="product in cart.products" class="cart__table__body_row cart__table__row">
+                            <td md-cell class="cart__table__body__cell cart__table__cell">{{ product.name }}</td>
+                            <td md-cell class="cart__table__body__cell cart__table__cell">{{ product.price }}</td>
+                            <td md-cell class="cart__table__body__cell cart__table__cell">{{ product.price - product.discount || 0 }} <span> (-{{ product.discount || 0 }} руб.)</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
+            <span ng-if="!cart.products.length" class="cart__label--empty">Корзина пуста!</span>
+        </div>
+        <div class="cart__info-block info-block" flex="50">
+            <div class="cart__info-block__note note">
+                <span>
+                    Скидка для каждой позиции рассчитывается пропорционально цене товара. Скидка всегда в рублях без копеек.
+                    Сумма скидок по каждому товару всегда точно равна общей суммы. При округлении остаток суммы применяется к самому
+                    дорогому товару в корзине
+                </span>
+            </div>
+        </div>
+    </section>
+    <md-divider></md-divider>
+    <section class="apply-discount section" layout>
+        <div flex class="cart__functional-block functional-block">
+            <span class="apply-discount__label">Применить скидку</span>
+            <md-input-container class="apply-discount__discount-input-container">
+            <input name="discount"
+                    type="number"
+                    class="apply-discount__discount-input-container__input"
+                    ng-model="cart.totalDiscount"
+                    min="0"
+                    max="{{cart.amount}}"
+                    step="1"
+                    aria-label="DISCOUNT">
+            </md-input-container>
+            <span class="apply-discount__label">руб.</span>
+            <md-button class="apply-discount__submit md-raised"
+                    aria-label="APPLY_DISCOUNT_BTN"
+                    ng-click="cart.applyDiscount()"> Применить </md-button>
+        </div>
+    </section>
+</md-content>
+
