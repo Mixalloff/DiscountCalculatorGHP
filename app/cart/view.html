@@ -1,8 +1,8 @@
-<link rel="stylesheet" href="/DiscountCalculatorGHP/app/cart/styles.css">
+<link rel="stylesheet" href="app/cart/styles.css">
 
 <md-content class="main-container section" layout="column">
-    <section class="add-product section" layout>
-        <div class="add-product__functional-block functional-block" flex="50">
+    <section class="add-product section" layout-xs="column" layout-gt-xs>
+        <div class="add-product__functional-block functional-block" flex-xs flex-gt-xs="50">
             <h2>Добавить продукт</h2>
             <md-input-container>
             <input name="added_product_name"
@@ -26,7 +26,7 @@
                     class="add-product__submit md-raised"
                     ng-click="cart.addProduct(addedProductName, addedProductPrice)"> Добавить </md-button>
         </div>
-        <div class="add-product__info-block info-block" flex="50">
+        <div class="add-product__info-block info-block" flex-xs flex-gt-xs="50">
             <div class="add-product__info-block__note note">
                 <span>С помощью этой формы вы можете добавить товары в корзину</span>
             </div>
@@ -34,8 +34,8 @@
        
     </section>
     <md-divider></md-divider>
-    <section class="cart section" layout>
-        <div class="cart__functional-block functional-block" flex="50">
+    <section class="cart section" layout-xs="column" layout-gt-xs>
+        <div class="cart__functional-block functional-block" flex-xs flex-gt-xs="50">
             <h2>Корзина</h2>
             <md-table-container ng-if="cart.products.length">
                 <table md-table class="cart__table">
@@ -57,7 +57,7 @@
             </md-table-container>
             <span ng-if="!cart.products.length" class="cart__label--empty">Корзина пуста!</span>
         </div>
-        <div class="cart__info-block info-block" flex="50">
+        <div class="cart__info-block info-block" flex-xs flex-gt-xs="50">
             <div class="cart__info-block__note note">
                 <span>
                     Скидка для каждой позиции рассчитывается пропорционально цене товара. Скидка всегда в рублях без копеек.
@@ -88,4 +88,3 @@
         </div>
     </section>
 </md-content>
-
