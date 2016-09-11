@@ -112,7 +112,7 @@
             $stateProvider
                 .state('cart', {
                     url: '/',
-                    templateUrl: 'app/cart/view.html',
+                    templateUrl: '/DiscountCalculatorGHP/app/cart/view.html',
                     controller: 'CartController',
                     controllerAs: 'cart'
                 })
